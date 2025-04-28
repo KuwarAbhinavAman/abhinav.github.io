@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <title>Kuwar Abhinav Aman Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bonbon&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        main {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            font-family: Poppins;
+        }
+
+        aside {
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            font-size: 1.1rem;
+            background-color: #212529;
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: -280px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        aside.active {
+            left: 0;
+        }
+
+        .Links {
+            display: flex;
+            flex-direction: column;
+            margin: auto 0;
+        }
+
+        aside li {
+            list-style-type: none;
+            display: flex;
+            padding: 20px;
+            gap: 10px;
+            color: white;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            transition-duration: 0.2s;
+        }
+
+        aside li:hover {
+            color: #80ed99;
+        }
+
+        aside li::after {
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            height: 1px;
+            background: linear-gradient(to left, transparent, #ffffff24, transparent);
+            content: '';
+            bottom: 0px;
+        }
+
+        aside li i {
+            font-size: 1.3rem;
+        }
+
+        .activeLink {
+            color: #80ed99;
+        }
+
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1100;
+            background: #212529;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .mySwiper {
+            flex: 1;
+            height: 100%;
+        }
+
+        .home-slide {
+            color: white;
+            display: flex;
+            background-color: #343a40;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .HomeContent {
+            margin: auto 0;
+            flex: 1;
+            padding: 20px;
+            user-select: none;
+        }
+
+        .SideImg {
+            width: 80%;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .SideImg img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .SideImg .top-right-corner,
+        .bottom-left-corner {
+            position: absolute;
+            display: none;
+        }
+
+        .hr1 {
+            width: 100px;
+            height: 8px;
+            border: none;
+            background: #80ed99;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .hr2 {
+            width: 8px;
+            height: 80px;
+            border-bottom-left-radius: 3px;
+            background: #80ed99;
+            border: none;
+            border-bottom-right-radius: 3px;
+        }
+
+        .HomeContent h1 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .HomeContent h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .HomeContent h1 .stylized-name {
+            font-weight: 700;
+            color: #80ed99;
+        }
+
+        .proffesions {
+            color: #85f69f;
+        }
+
+        .HomeContent .heroline {
+            font-size: 1rem;
+            font-weight: 300;
+            padding-right: 0;
+        }
+
+        .buttonGroup {
+            display: flex;
+            padding: 10px 0;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .buttonGroup button,
+        .primary {
+            padding: 8px 16px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #1d8637;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .slide-help {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-weight: 400;
+            z-index: 100;
+            font-size: 1rem;
+        }
+
+        .mySwiper {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #343a40;
+        }
+
+        .swiper-slide {
+            width: 100%;
+            background-color: #343a40;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .about-us {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            color: white;
+            overflow: auto;
+        }
+
+        .heading {
+            padding: 10px;
+            font-size: 2rem;
+            color: #80ed99;
+        }
+
+        .about-us h3 {
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+
+        .aboutme-deatils {
+            padding: 10px;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .about-me-divison {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-me-table {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .about-me-table li {
+            padding: 10px;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .about-me-table li::after {
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            height: 1px;
+            background: linear-gradient(to left, transparent, #ffffff77, transparent);
+            content: '';
+            bottom: 0px;
+        }
+
+        .about-me-table span {
+            color: #80ed99;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .about-me-table .buttonGroup {
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .skill-bar {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .skill-bar li {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .skill-bar p {
+            color: #80ed99;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .skill-bar .bar {
+            width: 100%;
+            height: 15px;
+            background-color: #272c30;
+            border-radius: 20px;
+        }
+
+        .active-bar {
+            background-color: #80ed99;
+            height: 100%;
+            width: auto;
+            border-radius: 20px;
+        }
+
+        .services {
+            color: white;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .services .heading {
+            grid-column: 1;
+        }
+
+        .services .service {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.437);
+            border-radius: 5px;
+            margin: 10px;
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            transition-duration: 0.25s;
+        }
+
+        .services .service i {
+            font-size: 2.5rem;
+            color: #80ed99;
+        }
+
+        .services .service .service-icon {
+            padding: 0 30px;
+            border-radius: 5px;
+            margin: 5px auto;
+        }
+
+        .service h2 {
+            color: #80ed99;
+            font-size: 1.5rem;
+        }
+
+        .service:hover {
+            background-color: #80ed99;
+            color: #176d2d;
+        }
+
+        .service:hover h2,
+        .service:hover i {
+            color: #176d2d;
+        }
+
+        .projects {
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .projects .heading {
+            font-size: 2rem;
+            color: #80ed99;
+            margin-bottom: 20px;
+        }
+
+        .project-list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        .project-item {
+            background-color: rgba(0, 0, 0, 0.437);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .project-details {
+            padding: 15px;
+        }
+
+        .project-details h2 {
+            font-size: 1.2rem;
+            color: #80ed99;
+            margin-bottom: 10px;
+        }
+
+        .project-details p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #80ed99;
+            color: #176d2d;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            background-color: #85f69f;
+        }
+
+        .contactMe {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 20px;
+        }
+
+        .contactMe h1 {
+            font-size: 2rem;
+            padding: 10px;
+        }
+
+        .contactinfo {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            color: white;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .contactinfo i {
+            padding: 10px;
+            font-size: 2rem;
+            color: #80ed99;
+            margin: 10px auto;
+        }
+
+        .contactinfo h3 {
+            color: #80ed99;
+            font-size: 1.2rem;
+        }
+
+        .contactMe form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 10px;
+            color: white;
+        }
+
+        .contactMe form h2 {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        .contactMe form input {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px;
+            font-size: 1rem;
+            border: none;
+            color: white;
+            background-color: #212529;
+        }
+
+        .contactMe form input:focus {
+            border: 1px solid #85f69f;
+            outline: none;
+        }
+
+        .contactMe form textarea {
+            width: calc(100% - 20px);
+            margin: 10px;
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            resize: none;
+            border: none;
+            color: white;
+            background-color: #212529;
+        }
+
+        .contactMe form textarea:focus {
+            border: 1px solid #85f69f;
+        }
+
+        .contactMe button {
+            margin: 10px auto;
+            padding: 10px 20px;
+        }
+
+        footer {
+            position: relative;
+            text-align: center;
+            color: white;
+            width: 100%;
+            font-weight: 200;
+            font-size: 0.8rem;
+            padding: 10px;
+        }
+
+        footer li {
+            padding: 5px;
+        }
+
+        form h2 .SocialLinks {
+            padding: 5px;
+            margin-left: auto;
+            background-color: #212529;
+            border-radius: 30px;
+        }
+
+        form h2 .SocialLinks i {
+            padding: 8px;
+            border-radius: 50%;
+            transition-duration: 0.25s;
+        }
+
+        form h2 .SocialLinks i:hover {
+            background-color: #176d2d;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            aside {
+                left: -280px;
+            }
+
+            aside.active {
+                left: 0;
+            }
+
+            .mySwiper {
+                width: 100%;
+            }
+
+            .home-slide {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .HomeContent {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .HomeContent h1 {
+                font-size: 1.8em;
+            }
+
+            .HomeContent h2 {
+                font-size: 1.3em;
+            }
+
+            .HomeContent .heroline {
+                font-size: 0.9rem;
+            }
+
+            .SideImg {
+                width: 60%;
+                margin: 10px auto;
+            }
+
+            .about-us {
+                padding: 10px;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+
+            .projects {
+                padding: 10px;
+            }
+
+            .project-list {
+                grid-template-columns: 1fr;
+            }
+
+            .contactMe {
+                padding: 10px;
+            }
+
+            .contactMe form input,
+            .contactMe form textarea {
+                margin: 5px;
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+
+            .contactMe form h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .HomeContent h1 {
+                font-size: 1.5em;
+            }
+
+            .HomeContent h2 {
+                font-size: 1.1em;
+            }
+
+            .HomeContent .heroline {
+                font-size: 0.8rem;
+            }
+
+            .buttonGroup button {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            .heading {
+                font-size: 1.5rem;
+            }
+
+            .project-details h2 {
+                font-size: 1rem;
+            }
+
+            .project-details p {
+                font-size: 0.8rem;
+            }
+
+            .project-link {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .contactinfo i {
+                font-size: 1.5rem;
+            }
+
+            .contactinfo h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <aside>
+            <ul class="Links">
+                <li onclick="Navigate(0)" class="activeLink"><i class="fa-solid fa-house"></i>
+                    <p>Home</p>
+                </li>
+                <li onclick="Navigate(1)"><i class="fa-solid fa-user"></i>
+                    <p>About Me</p>
+                </li>
+                <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
+                    <p>Services</p>
+                </li>
+                <li onclick="Navigate(3)"><i class="fa-solid fa-folder"></i>
+                    <p>Projects</p>
+                </li>
+                <li onclick="Navigate(4)"><i class="fa-solid fa-comments"></i>
+                    <p>Contact Me</p>
+                </li>
+            </ul>
+        </aside>
+        <div class="swiper mySwiper">
+            <div class="SlideContainer swiper-wrapper">
+                <div class="swiper-slide home-slide">
+                    <div class="HomeContent">
+                        <h1>Hi! I'm <span class="stylized-name">Kuwar Abhinav Aman</span>,</h1>
+                        <h2>A <span class="proffesions">Data Analyst</span></h2>
+                        <p class="heroline">I specialize in turning data into insights and ideas into functional web
+                            applications. With a passion for problem-solving and technology, I create solutions that
+                            make an impact.</p>
+                        <div class="buttonGroup">
+                            <button onclick="Navigate(4)">Hire Me</button>
+                            <button onclick="Navigate(4)">Contact Me</button>
+                        </div>
+                    </div>
+                    <div class="SideImg">
+                        <div class="top-right-corner">
+                            <hr class="hr1">
+                            <hr class="hr2">
+                        </div>
+                        <img src="image.jpeg" alt="Kuwar Abhinav Aman">
+                        <div class="bottom-left-corner">
+                            <hr class="hr1">
+                            <hr class="hr2">
+                        </div>
+                    </div>
+                    <p class="slide-help">Scroll for next slide <i class="fa-solid fa-chevron-right fa-shake"></i>
+                    </p>
+                </div>
+                <div class="swiper-slide">
+                    <div class="about-us">
+                        <h1 class="heading">About Me</h1>
+                        <h3 class="sub-heading">I'm Kuwar Abhinav Aman, <span class="proffesions">A Data Analyst</span>
+                        </h3>
+                        <p class="aboutme-deatils">
+                            I am a passionate data analyst and web developer with expertise in Python, Power BI, SQL,
+                            and Django. I thrive on solving problems, designing impactful solutions, and creating
+                            user-friendly applications. My goal is to bridge technology and functionality to drive
+                            results.
+                        </p>
+                        <div class="about-me-divison">
+                            <div class="about-me-table">
+                                <li><span>Experience:</span> 1 year</li>
+                                <li><span>Country:</span> India</li>
+                                <li><span>Avability:</span> 24/7 </li>
+                                <li><span>Age</span>: 23</li>
+                                <li><span>Phone</span>: +91843190134</li>
+                                <li><span>Language Used:</span> HTML</li>
+                                <li><span>Degree</span>: MBA</li>
+                                <div class="buttonGroup">
+                                    <button onclick="Navigate(4)">Hire Me</button>
+                                    <button onclick="Navigate(4)">Contact Me</button>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <li>
+                                    <p>Power BI</p>
+                                    <div class="bar">
+                                        <div class="active-bar" style="width:80%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>Advance Excel</p>
+                                    <div class="bar">
+                                        <div class="active-bar" style="width:80%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>MySQL</p>
+                                    <div class="bar">
+                                        <div class="active-bar" style="width:70%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>Python</p>
+                                    <div class="bar">
+                                        <div class="active-bar" style="width:80%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>Django</p>
+                                    <div class="bar">
+                                        <div class="active-bar" style="width:50%"></div>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide services">
+                    <h1 class="heading">Services</h1>
+                    <div class="service">
+                        <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                        <h2>Web Design</h2>
+                        <p>Creating clean, modern, and user-friendly website designs.</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+                        <h2>Web Development</h2>
+                        <p>Developing robust websites and web apps tailored to your needs.</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h2>Data Analytics</h2>
+                        <p>Analyzing and visualizing data to unlock insights and trends.</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-icon"><i class="fa-solid fa-database"></i></div>
+                        <h2>Database Management</h2>
+                        <p>Optimizing database performance and ensuring data integrity for seamless operations.</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-icon"><i class="fa-solid fa-tachometer-alt"></i></div>
+                        <h2>Interactive Dashboards</h2>
+                        <p>Building visually appealing dashboards using Power BI to track key metrics.</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h2>Data Automation & Reporting</h2>
+                        <p>Automating data workflows and generating real-time reports using Python, Excel, and SQL.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide projects">
+                    <h1 class="heading">Projects</h1>
+                    <div class="project-list-container">
+                        <div class="project-list">
+                            <div class="project-item">
+                                <div class="project-image">
+                                    <img src="https://picsum.photos/200/300?random=7" alt="JARVIS AI Voice Assistant">
+                                </div>
+                                <div class="project-details">
+                                    <h2>JARVIS AI Voice Assistant</h2>
+                                    <p>An AI-based personal assistant with face authentication for secure access.
+                                        Developed with Python backend and HTML/CSS/JavaScript frontend. Features include
+                                        app control, information retrieval, reminders, and secure face recognition
+                                        authentication.</p>
+                                    <a href="https://github.com/KuwarAbhinavAman/J.A.R.V.I.S-/tree/master"
+                                        class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-image">
+                                    <img src="https://picsum.photos/200/300?random=10" alt="Amazon Analysis Dashboard">
+                                </div>
+                                <div class="project-details">
+                                    <h2>Amazon Product Analysis Dashboard</h2>
+                                    <p>Power BI dashboard providing comprehensive analysis of Amazon products including
+                                        sales trends, customer reviews, and product performance metrics with interactive
+                                        visualizations and data-driven insights.</p>
+                                    <a href="https://github.com/KuwarAbhinavAman/Amazon_Analysis" class="project-link"
+                                        target="_blank" rel="noopener noreferrer">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-image">
+                                    <img src="https://picsum.photos/200/300?random=11" alt="Blinkit Analysis Dashboard">
+                                </div>
+                                <div class="project-details">
+                                    <h2>Blinkit Analysis Dashboard</h2>
+                                    <p>Power BI dashboard analyzing Blinkit's operational data including sales patterns,
+                                        customer behavior analytics, delivery performance metrics, and inventory
+                                        management insights.</p>
+                                    <a href="https://github.com/KuwarAbhinavAman/Blinkit_-sales-dashboard-task_4"
+                                        class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-image">
+                                    <img src="https://picsum.photos/200/300?random=9" alt="Social Media App">
+                                </div>
+                                <div class="project-details">
+                                    <h2>Social Media Application</h2>
+                                    <p>A Django-based social media platform featuring user authentication, real-time
+                                        chat functionality, post creation, user profiles, and interactive elements with
+                                        a responsive frontend design.</p>
+                                    <a href="https://github.com/KuwarAbhinavAman/sccial_media_app" class="project-link"
+                                        target="_blank" rel="noopener noreferrer">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-image">
+                                    <img src="https://picsum.photos/200/300?random=13" alt="Student Score Analyzer">
+                                </div>
+                                <div class="project-details">
+                                    <h2>Advanced Student Score Analyzer with ML</h2>
+                                    <p>Machine learning application that analyzes student performance data to predict
+                                        outcomes, identify at-risk students, and provide actionable insights for
+                                        academic improvement using predictive analytics.</p>
+                                    <a href="https://github.com/KuwarAbhinavAman/Advance-student-score-analyzer-withML/blob/main"
+                                        class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide contactMe">
+                    <h1 class="heading">Contact Me</h1>
+                    <div class="contactinfo"><i class="fa-solid fa-phone"></i>
+                        <h3>Mobile No</h3>
+                        <p>+91843190134</p>
+                    </div>
+                    <div class="contactinfo"><i class="fa-solid fa-location-dot"></i>
+                        <h3>Location</h3>
+                        <p>Greater Noida</p>
+                    </div>
+                    <div class="contactinfo"><i class="fa-regular fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>abhinavabby9@gmail.com</p>
+                    </div>
+                    <form id="contactForm" onsubmit="sendEmail(event)">
+                        <h2>Send Me A Message
+                            <div class="SocialLinks">
+                                <a href="https://www.linkedin.com/in/kuwar-abhinav-aman-4888b2238/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </h2>
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" rows="8" placeholder="Type your Message Here..." required></textarea>
+                        <button type="submit" class="primary">Send</button>
+                    </form>
+                    <footer>
+                        <li>Copyright © 2025 ABBY.</li>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init("i65U53N4yTK_YnW1");
+
+        function sendEmail(event) {
+            event.preventDefault();
+            const form = event.target;
+            const name = form.querySelector('input[name="name"]').value;
+            const email = form.querySelector('input[name="email"]').value;
+            const message = form.querySelector('textarea[name="message"]').value;
+
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message
+            };
+
+            emailjs.send("service_442mfh", "temp_gechfl0x", templateParams)
+                .then(function(response) {
+                    alert("Message sent successfully!");
+                    form.reset();
+                }, function(error) {
+                    console.error("EmailJS Error:", error);
+                    alert("Failed to send message. Please try again later or contact me directly at abhinavabby9@gmail.com");
+                });
+        }
+
+        // Initialize Swiper
+        var swiper = new Swiper(".swiper", {
+            effect: "cube",
+            allowTouchMove: true,
+            grabCursor: true,
+            cubeEffect: {
+                shadow: true,
+                slideShadows: true,
+                shadowOffset: 20,
+                shadowScale: 0.94,
+            },
+            mousewheel: {
+                forceToAxis: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const aside = document.querySelector('aside');
+            aside.classList.toggle('active');
+        }
+
+        // Navigate to slide
+        function Navigate(index) {
+            document.querySelectorAll(".Links li").forEach((link) => link.classList.remove("activeLink"));
+            document.querySelectorAll(".Links li")[index].classList.add("activeLink");
+            swiper.slideTo(index, 1000, true);
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
+        }
+
+        // Set initial active link
+        document.addEventListener("DOMContentLoaded", function () {
+            const initialSlide = swiper.activeIndex;
+            Navigate(initialSlide);
+        });
+
+        // Update active link on slide change
+        swiper.on("slideChange", function () {
+            const activeIndex = swiper.activeIndex;
+            Navigate(activeIndex);
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowRight") {
+                swiper.slideNext();
+            } else if (event.key === "ArrowLeft") {
+                swiper.slidePrev();
+            }
+        });
+
+        // Close menu on resize to desktop
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                document.querySelector('aside').classList.remove('active');
+            }
+        });
+    </script>
